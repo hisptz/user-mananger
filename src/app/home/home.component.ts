@@ -231,8 +231,8 @@ export class HomeComponent implements OnInit, OnChanges {
             observer.next(usersListResponse);
             observer.complete();
           }, (usersListError) => {
-              observer.error(usersListError);
-              observer.complete();
+            observer.error(usersListError);
+            observer.complete();
           });
         }, (error) => {
           console.log(error);
