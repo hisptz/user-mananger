@@ -1,0 +1,132 @@
+<div class="col-lg-12 col-md-12 col-xs-12">
+  <div>
+    <div class="col-lg-12 col-md-12 col-xs-12">
+      <div aria-label="..." class="btn-group" role="group">
+      </div>
+    </div>
+    <div id="editor"></div>
+    <div class="row">
+      <div class="row" *ngIf="userTable" style="padding: 10px">
+        <div class="col-lg-1 col-md-2 col-xs-2">
+          <span class="align-self-center m-xs text-muted hideOnMobile">Rows per page:</span>
+          <span class="align-self-center m-xs text-muted showOnMobile">Rows:</span>
+        </div>
+        <div class="col-lg-1 col-md-2 col-xs-2">
+          <div class="dropdown">
+            <button class="btn btn-default btn-sm   dropdown-toggle" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="true"
+                    data-toggle="dropdown"
+                    type="button">{{pageSize}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li class="dropdown-item {{pageSize?.className}}">
+                <a href="#" *ngFor="let pageSize of pageSizeChanger" (click)="changePageSize(pageSize)">{{pageSize?.item}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-xs-6">
+
+          <span class="align-self-center m-xs text-muted">{{pager?.startIndex+1}}-{{pager?.endIndex+1}} of {{this.userTable.rows.length}}</span>
+          &nbsp;
+          <a (click)="prevPage()"
+             [ngClass]="{disabled:currentPage===1}"
+             [class.disabled]="currentPage===1" style="color: black;cursor: pointer;">
+            <i class="fa fa-arrow-circle-o-left fa-2x"></i></a>
+          &nbsp;
+          <a (click)="nextPage()" style="color: black;cursor: pointer;"
+             [ngClass]="{disabled:currentPage === pager?.totalPages}"
+             [class.disabled]="currentPage === pager?.totalPages">
+            <i class="fa fa-arrow-circle-o-right fa-2x"></i></a>
+        </div>
+        <div class="col-lg-1 col-md-1 col-xs-2">
+          <button class="btn btn-default btn-sm  pull-left"
+                  (click)="downloadExel()(['usersList'], ['users'], 'Distribution Point Users.xls', 'Excel');downloadPDF()">
+            <div class="showOnMobile"><i class="fa fa-file-excel-o"></i></div>
+            <span class="hideOnMobile"><i class="fa fa-file-excel-o"></i>&nbsp;Download</span>
+          </button>
+        </div>
+        <div class="col-lg-7 col-md-8 col-xs-12">
+          <div class="col-md-12" class="showOnMobile">
+            <br/>
+          </div>
+          <input class="form-control pull-right" [(ngModel)]="query" placeholder="Search user">
+        </div>
+
+      </div>
+      <div class="col-md-12">
+      </div>
+      <div class="col-lg-12 col-md-12 col-xs-12">
+        <br/>
+        <table *ngIf="userTable && (pagedItems| search:'columns':query).length>0"
+               id="usersList"
+               class="table table-responsive table-bordered table-hover">
+          <thead>
+          <tr>
+            <th *ngFor="let header of userTable.headers">{{header}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let row of pagedItems | search:'columns':query; let i = index">
+            <td>{{i+1}}</td>
+            <td *ngFor="let column of row.columns"
+                [ngClass]="{coloring:column === 'None' || column === 'Never', activated:column === 'Active', inactivated:column === 'Inactive'}">
+              {{column}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="userTable && (pagedItems| search:'columns':query).length===0" style="text-align: center"
+             class="alert alert-success alert-info">
+          No results found <span *ngIf="query" style="font-weight: bold">for keyword {{query}}</span>
+        </div>
+        <div class="row" *ngIf="userTable" style="padding: 10px">
+          <div class="col-lg-1 col-md-2 col-xs-2">
+            <span class="align-self-center m-xs text-muted hideOnMobile">Rows per page:</span>
+            <span class="align-self-center m-xs text-muted showOnMobile">Rows:</span>
+          </div>
+          <div class="col-lg-1 col-md-2 col-xs-2">
+            <div class="dropdown">
+              <button class="btn btn-default btn-sm   dropdown-toggle" type="button" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="true"
+                      data-toggle="dropdown"
+                      type="button">{{pageSize}}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li class="dropdown-item {{pageSize?.className}}">
+                  <a href="#" *ngFor="let pageSize of pageSizeChanger" (click)="changePageSize(pageSize)">{{pageSize?.item}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-8 col-xs-8">
+
+            <span class="align-self-center m-xs text-muted">{{pager?.startIndex+1}}-{{pager?.endIndex+1}} of {{this.userTable.rows.length}}</span>
+            &nbsp;
+            <a (click)="prevPage()"
+               [ngClass]="{disabled:currentPage===1}"
+               [class.disabled]="currentPage===1" style="color: black;cursor: pointer;">
+              <i class="fa fa-arrow-circle-o-left fa-2x"></i></a>
+            &nbsp;
+            <a (click)="nextPage()" style="color: black;cursor: pointer;"
+               [ngClass]="{disabled:currentPage === pager?.totalPages}"
+               [class.disabled]="currentPage === pager?.totalPages">
+              <i class="fa fa-arrow-circle-o-right fa-2x"></i></a>
+          </div>
+        </div>
+        <div *ngIf="!userTable" class="container">
+          <div class="col-md-12">
+            <div class="col-md-2" style="padding-right:0px">
+              <div class="loader loader8">&nbsp;</div>&nbsp;
+            </div>
+            <div class="col-md-10 " style="padding-left:0px;">
+              <p style="padding-top:40px">{{loadingInformation}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

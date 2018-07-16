@@ -1,0 +1,14 @@
+{
+  "/api": {
+    "target": "https://wpdm.maji.go.tz",
+    "secure": "false",
+    "auth": "lmpande:MPANDE88LEO",
+    "changeOrigin": "true"
+  },
+  "/": {
+    "target": "https://wpdm.maji.go.tz",
+    "secure": "false",
+    "auth": "lmpande:MPANDE88LEO",
+    "changeOrigin": "true"
+  }
+}

@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "name": "Distribution Point Users Management",
+    "description": "Distribution Point Users Management",
+    "launch_path": "index.html",
+    "icons": {
+        "16": "assets/user.png",
+        "48": "assets/user.png",
+        "128": "assets/user.png"
+    },
+    "developer": {
+        "name": "HISPTZ",
+        "url": "https://hisptanzania.org"
+    },
+    "default_locale": "en",
+    "activities": {
+        "dhis": {
+            "href": "../../../"
+        }
+    }
+}

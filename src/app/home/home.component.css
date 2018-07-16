@@ -1,0 +1,95 @@
+div.division{
+  font-family:courier,sans-serif; padding:20px; border: 1px solid #ddd;
+
+}
+
+body{
+  font-family:courier,sans-serif;
+}
+
+
+.coloring{
+  color: #cccccc;
+}
+.activated {
+  color:#199B59;
+}
+
+.inactivated{
+  color:#F0544C;
+}
+
+.disabled{
+  color: #dddddd!important;
+}
+
+/*body{*/
+/*background:black;*/
+/*color:white;*/
+/*display:flex;*/
+/*flex-direction:column;*/
+/*align-items:center;*/
+/*}*/
+@keyframes glow{
+  50%{
+    border-color:lime;
+    width:95%;
+    box-shadow:0px 0px 10px -2px green;
+  }
+  100%{
+    border-color:green;
+    width:35%;
+    box-shadow:0px 0px 10px -2px green;
+  }
+}
+
+.loader{
+  width:100px;
+  height:100px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:10px 20px;
+}
+@keyframes load{
+  50%{
+    transform:rotatez(180deg) scale(0.2);
+    border-color:orange;
+  }
+  100%{
+    transform:rotatez(360deg) scale(1.1);
+  }
+}
+
+@keyframes load8{
+  100%{
+    transform:rotatez(360deg);
+  }
+}
+.loader8::before{
+  content:"";
+  color:white;
+  height:50px;
+  width:50px;
+  background:transparent;
+  border-radius:50%;
+  border:10px solid transparent;
+  border-color:#039BE5 #039BE5 transparent transparent;
+  animation:load8 .6s infinite;
+}
+
+.showOnMobile{
+  display: none;
+}
+.hideOnMobile{
+  display: block;
+}
+@media only screen and (max-device-width: 480px) {
+  .showOnMobile{
+    display: block!important;
+  }
+
+  .hideOnMobile{
+    display: none!important;
+  }
+}
